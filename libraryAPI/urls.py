@@ -22,7 +22,7 @@ from books import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('book/api/v1/', include('users.urls')),
-    path('book/api/v1/list/', views.BooksAPIList.as_view()),
-    path('book/api/v1/create/', views.BookAPICreate.as_view()),
-    path('book/api/v1/<int:pk>', views.BookAPI.as_view()),
+    path('book/api/v1/list/', views.BooksAPIList.as_view(), name='list'),
+    path('book/api/v1/create/', views.BookAPICreate.as_view(), name='create'),
+    path('book/api/v1/<int:pk>', views.BookAPI.as_view(), name='RUD'),
 ]
