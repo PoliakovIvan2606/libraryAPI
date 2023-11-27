@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  # MySQL service
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_DATABASE: 'MySQL'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  # Redis service
+  redis:
+    image: "redis:latest"
+    hostname: redis
+
+  # Django service
+  web:
+    build: .
+    command:
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+    links:
+      - redis
+
+  # Celery service
+  celery:
+    build: .
+    command: celery -A libraryAPI worker -l info -P solo
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    links:
+      - redis
+volumes:
+  mysql_data:
+  app:
