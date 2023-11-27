@@ -13,14 +13,14 @@ RUN python -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
 # Create and set the working directory
-WORKDIR /app
+WORKDIR /libraryAPI
 
 # Install dependencies
-COPY requirements.txt /app/
+COPY requirements.txt /libraryAPI/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the project code into the container
-COPY . /app/
+COPY . /libraryAPI/
 
 # Expose the port the app will run on
 EXPOSE 8000
