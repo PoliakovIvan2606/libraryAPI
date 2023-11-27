@@ -44,3 +44,6 @@ pk - id книги в которой лежит книга
     "ISBN": "978-5-44-610923-4"
 }
 8) delete запрос на url book/api/v1/<int:pk> с заголовком Authorization удаляет книгу
+
+
+   Так же есть видеоинструкция проекта, ссылка на google диск: https://drive.google.com/file/d/1w6_-4qI6_l2CiMbFiXEsiotAEVjTQ27w/view?usp=sharing
